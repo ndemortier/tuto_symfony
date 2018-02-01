@@ -22,7 +22,7 @@ nd_platform_edit:
     path:   /edit/{id}
     defaults:
         _controller: NDPlatformBundle:Advert:edit
-    requirements:
+    requirements    :
         id: \d+
 
 nd_platform_delete:

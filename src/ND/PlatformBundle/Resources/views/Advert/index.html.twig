@@ -1,19 +1,25 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Bienvenue sur ma première page avec OpenClassrooms !</title>
-  </head>
-  <body>
-    <h1>Hello World !</h1>
+{% extends "NDPlatformBundle::layout.html.twig" %}
 
-    <p>
-      Le Hello World est un grand classique en programmation.
-      Il signifie énormément, car cela veut dire que vous avez
-      réussi à exécuter le programme pour accomplir une tâche simple :
-      afficher ce hello world !
-    </p>
-    <p>
-      Lien vers l'annonce d'id 5 : <a href="{{ path('nd_platform_view', {'id': 5}) }}">ici</a>
-    </p>
-  </body>
-</html>
+{% block title %}
+  Accueil - {{ parent() }}
+{% endblock %}
+
+{% block ndplatform_body %}
+  
+  <h2>Listes des annonces</h2>
+
+  <ul>
+    {% for advert in listAdverts %}
+      <li>
+        <a href="{{ path('nd_platform_view', {'id': advert.id}) }}">
+          {{ advert.title }}
+        </a>
+        par {{ advert.author }},
+        le {{ advert.date|date('d/m/Y') }}
+      </li>
+    {% else %}
+      <li>Pas (encore !) d'annonces</li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

@@ -14,12 +14,44 @@ class AdvertController extends Controller
       throw new NotFoundHttpException('page "'.$page.'" inexistante.') ;
     }
 
-    return $this->render('NDPlatformBundle:Advert:index.html.twig') ;
+    $listAdverts = array(
+      array(
+        'title'   => 'Recherche développpeur Symfony',
+        'id'      => 1,
+        'author'  => 'Alexandre',
+        'content' => 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
+        'date'    => new \Datetime()
+      ),
+      array(
+        'title'   => 'Mission de webmaster',
+        'id'      => 2,
+        'author'  => 'Hugo',
+        'content' => 'Nous recherchons un webmaster capable de maintenir notre site internet. Blabla…',
+        'date'    => new \Datetime()
+      ),
+      array(
+        'title'   => 'Offre de stage webdesigner',
+        'id'      => 3,
+        'author'  => 'Mathieu',
+        'content' => 'Nous proposons un poste pour webdesigner. Blabla…',
+        'date'    => new \Datetime()
+        )
+    );
+
+    return $this->render('NDPlatformBundle:Advert:index.html.twig', array('listAdverts' => $listAdverts)) ;
   }
 
   public function viewAction($id)
   {
-    return $this->render('NDPlatformBundle:Advert:view.html.twig', array('id' => $id)) ;
+    $advert = array(
+      'title'   => 'Recherche développeur Symfony',
+      'id'      => $id,
+      'author'  => 'Nicolas',
+      'content' => 'Nous recherche un développeur Symfony débutant sur Lille. Blabla...',
+      'date'    => new \Datetime()
+    );
+
+    return $this->render('NDPlatformBundle:Advert:view.html.twig', array('advert' => $advert)) ;
   }
 
   public function addAction(Request $request) {
@@ -36,11 +68,27 @@ class AdvertController extends Controller
     if($request->isMethod('POST')) {
       $request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.') ;
 
-      return $this->render('NDPlatformBundle:Advert:edit.html.twig') ;
+      return $this->redirectToRoute('nd_platform_view', array('id' => 5));
     }
+
+    $advert = array(
+      'title'   => 'Recherche développeur Symfony',
+      'id'      => $id,
+      'author'  => 'Nicolas',
+      'content' => 'Nous recherchons un développeur Symfony débutant sur Lille. Blabla...',
+      'date'    => new \Datetime()
+    ) ;
+
+    return $this->render('NDPlatformBundle:Advert:edit.html.twig', array('advert' => $advert)) ;
   }
 
   public function deleteAction() {
     return $this->render('NDPlatformBundle:Advert:delete.html.twig') ;
+  }
+
+  public function menuAction() {
+    $listAdverts = array(array('id' => 2, 'title' => 'Recherche développeur Symfony'), array('id' => 5, 'title' => 'Mission de webmaster'), array('id' => 9, 'title' => 'Offre de stage webdesigner')) ;
+
+    return $this->render('NDPlatformBundle:Advert:menu.html.twig', array('listAdverts' => $listAdverts)) ;
   }
 }
