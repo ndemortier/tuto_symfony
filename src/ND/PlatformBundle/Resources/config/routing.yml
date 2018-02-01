@@ -1,0 +1,33 @@
+nd_platform_home:
+    path:   /{page}
+    defaults: 
+        _controller: NDPlatformBundle:Advert:index
+        page:   1
+    requirements:
+        page:   \d*
+
+nd_platform_view:
+    path:   /advert/{id}
+    defaults: 
+        _controller: NDPlatformBundle:Advert:view
+    requirements:
+        id: \d+
+
+nd_platform_add:
+    path:   /add
+    defaults: 
+        _controller: NDPlatformBundle:Advert:add
+
+nd_platform_edit:
+    path:   /edit/{id}
+    defaults:
+        _controller: NDPlatformBundle:Advert:edit
+    requirements:
+        id: \d+
+
+nd_platform_delete:
+    path:   /delete/{id}
+    defaults:
+        _controller: NDPlatformBundle:Advert:delete
+    requirements:
+        id: \d+

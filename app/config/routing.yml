@@ -1,0 +1,3 @@
+nd_platfrom:
+    resource: "@NDPlatformBundle/Resources/config/routing.yml"
+    prefix:   /platform
